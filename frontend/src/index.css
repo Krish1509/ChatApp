@@ -1,0 +1,313 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+	background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("/bg7.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Place it behind all other content */
+    overflow: hidden;
+}
+
+#bg-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+    transform: translate(-50%, -50%);
+    background-size: cover;
+    background-position: center;
+}
+/* dark mode looking scrollbar */
+body::-webkit-scrollbar {
+	width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+	background: #555;
+}
+
+body::-webkit-scrollbar-thumb {
+	background: #121212;
+	border-radius: 5px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+	background: #242424;
+}
+
+/* SHAKE ANIMATION ON HORIZONTAL DIRECTION */
+/* .shake {
+	animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) 0.2s both;
+	transform: translate3d(0, 0, 0);
+	backface-visibility: hidden;
+	perspective: 1000px;
+} */
+
+/* @keyframes shake {
+	10%,
+	90% {
+		transform: translate3d(-1px, 0, 0);
+	}
+
+	20%,
+	80% {
+		transform: translate3d(2px, 0, 0);
+	}
+
+	30%,
+	50%,
+	70% {
+		transform: translate3d(-4px, 0, 0);
+	}
+
+	40%,
+	60% {
+		transform: translate3d(4px, 0, 0);
+	}
+} */
+/* Define the keyframes for the sending animation */
+@keyframes send-animation {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Apply animation properties to .sendanimation */
+.sendanimation {
+    animation: send-animation 0.5s ease-out forwards;
+    display: inline-block;
+}
+/* Define the keyframes for the sending animation */
+@keyframes send-animation2 {
+    100% {
+        transform: translateX(100%);
+        opacity: 1;
+    }
+    0% {
+        transform: translateX(0%);
+        opacity: 0;
+    }
+}
+
+
+/* Define the keyframes for the receiving animation */
+@keyframes receive-animation {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Apply animation properties to .receiveranimation */
+.receiveranimation {
+    animation: receive-animation 0.5s ease-out forwards;
+    display: inline-block;
+}
+.message-container {
+	display: flex;
+	align-items: center;
+	max-width: 100%;
+  }
+  
+  .chat-bubble {
+	word-wrap: break-word;
+	white-space: pre-wrap;
+	max-width: 100%;
+  }
+  
+  .delete-button {
+	margin-right: 8px;
+  }
+  
+  .message {
+	position: relative;
+	padding: 10px;
+	margin: 10px 0;
+	background: #f4f4f4;
+	border-radius: 5px;
+	transition: all 0.3s ease-in-out;
+  }
+  
+  .message.deleting {
+	transform: translateY(100px) rotate(-45deg);
+	opacity: 0;
+  }
+  
+  .delete-btn {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background: red;
+	color: white;
+	border: none;
+	padding: 5px;
+	cursor: pointer;
+	border-radius: 50%;
+	transition: all 0.3s ease-in-out;
+  }
+  
+  .delete-btn:active {
+	background: darkred;
+  }
+  
+  .sparks {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 50px;
+	height: 50px;
+	background: url('path_to_sparks_image.png') no-repeat center center;
+	background-size: cover;
+	transform: translate(-50%, -50%);
+	animation: sparks 0.5s linear;
+  }
+  
+  @keyframes sparks {
+	0% {
+	  opacity: 1;
+	  transform: translate(-50%, -50%) scale(1);
+	}
+	100% {
+	  opacity: 0;
+	  transform: translate(-50%, -50%) scale(2);
+	}
+  }
+  /* For Webkit browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+	width: 8px; /* Thin scrollbar */
+  }
+  
+  ::-webkit-scrollbar-track {
+	background: #f1f1f1; /* Light grey track */
+  }
+  
+  ::-webkit-scrollbar-thumb {
+	background: #323232; /* Dark grey thumb */
+	border-radius: 10px; /* Rounded corners */
+  }
+  
+  /* For Firefox */
+  * {
+	scrollbar-width: thin; /* Thin scrollbar */
+	scrollbar-color: #6B7280 #f1f1f100; /* Dark grey thumb and light grey track */
+  }
+  
+  /* For Edge and other modern browsers (using Webkit) */
+  .scroll-container {
+	scrollbar-width: thin;
+	scrollbar-color: #313131 #c6c6c6;
+  }
+
+  /* Add this to your Tailwind CSS file or within a <style> tag in your component */
+.fullscreen-button {
+	@apply p-2 bg-gray-800 text-white rounded-md fixed top-4 right-4;
+  }
+  
+  .fullscreen-button:hover {
+	@apply bg-gray-600;
+  }
+  
+  @keyframes shake {
+	0% { transform: rotate(0deg); }
+	10% { transform: rotate(-10deg); }
+	20% { transform: rotate(10deg); }
+	30% { transform: rotate(-10deg); }
+	40% { transform: rotate(10deg); }
+	50% { transform: rotate(-10deg); }
+	60% { transform: rotate(10deg); }
+	70% { transform: rotate(-10deg); }
+	80% { transform: rotate(10deg); }
+	90% { transform: rotate(-10deg); }
+	100% { transform: rotate(0deg); }
+  }
+  
+  .shake-hand {
+	display: inline-block;
+	animation: shake 3s infinite;
+	transform-origin: 70% 70%;
+	font-size: 1.6rem;
+  }
+  .flex.items-center.justify-center.w-full.h-full {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+/* Global CSS or a CSS module file */
+.chat-section-enter {
+	opacity: 0;
+	transform: translateX(-10%);
+  }
+  
+  .chat-section-enter-active {
+	opacity: 1;
+	transform: translateX(0%);
+	transition: opacity 300ms ease-out, transform 300ms ease-out;
+  }
+  
+  .chat-section-exit {
+	opacity: 1;
+	transform: translateX(0%);
+  }
+  
+  .chat-section-exit-active {
+	opacity: 0;
+	transform: translateX(-10%);
+	transition: opacity 300ms ease-in, transform 300ms ease-in;
+  }
+  
+
+  @keyframes fadeInSlideIn {
+	0% {
+	  opacity: 0;
+	  transform: translateX(20px);
+	}
+	100% {
+	  opacity: 1;
+	  transform: translateX(0);
+	}
+  }
+  
+  .message-container {
+	animation: fadeInSlideIn 0.5s ease-in-out;
+  }
+  /* Add these styles to your CSS file (e.g., index.css) */
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.chat-section-enter {
+    animation: slideInFromRight 0.3s ease-out forwards;
+}
