@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { BsSend, BsEmojiSmile } from 'react-icons/bs';
 import Picker from 'emoji-picker-react';
 import useSendMessage from '../../hooks/useSendMessage';
@@ -7,6 +7,7 @@ const MessageInput = ({ inputRef }) => {
     const [message, setMessage] = useState("");
     const [showEmojiPicker, setShowEmojiPicker] = useState(false);
     const { loading, sendMessage } = useSendMessage();
+    const emojiPickerRef = useRef(null);
 
     const handleEmojiClick = (emojiObject) => {
         setMessage(prevMessage => prevMessage + emojiObject.emoji);
@@ -20,17 +21,36 @@ const MessageInput = ({ inputRef }) => {
         setShowEmojiPicker(false);
     };
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                emojiPickerRef.current &&
+                !emojiPickerRef.current.contains(event.target) &&
+                !inputRef.current.contains(event.target)
+            ) {
+                setShowEmojiPicker(false);
+            }
+        };
+
+        if (showEmojiPicker) {
+            document.addEventListener('mousedown', handleClickOutside);
+        } else {
+            document.removeEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [showEmojiPicker, inputRef]);
+
     return (
         <div className="relative">
-            <form action="" className="px-4 py-2" onSubmit={handleSubmit}>
+            <form className="px-4 py-2" onSubmit={handleSubmit}>
                 <div className="relative flex items-center">
                     <button
                         type="button"
                         className="absolute inset-y-0 left-0 flex items-center pl-3 text-white"
-                        onClick={() => {
-                            setShowEmojiPicker(val => !val);
-                            inputRef.current?.focus(); // Focus the input field
-                        }}
+                        onClick={() => setShowEmojiPicker((val) => !val)}
                     >
                         <BsEmojiSmile />
                     </button>
@@ -48,7 +68,11 @@ const MessageInput = ({ inputRef }) => {
                 </div>
             </form>
             {showEmojiPicker && (
-                <div className="absolute bottom-12 left-0 z-50" style={{ backgroundColor: '#1D232A' }}>
+                <div
+                    ref={emojiPickerRef} // Attach the reference to the emoji picker
+                    className="absolute bottom-12 left-0 z-50"
+                    style={{ backgroundColor: '#1D232A' }}
+                >
                     <Picker onEmojiClick={handleEmojiClick} theme="dark" />
                 </div>
             )}

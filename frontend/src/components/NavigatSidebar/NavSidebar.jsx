@@ -167,7 +167,7 @@ const NavSidebar = () => {
                 >
                     <LogoutButton className="text-white text-2xl cursor-pointer " />
                     {isLogoutHovered && (
-                        <div className="absolute left-full transform -translate-y-1/2 ml-2 p-2 bg-gray-700 text-white text-sm font-semibold rounded shadow-lg">
+                        <div className="absolute left-full transform -translate-y-1/2 ml-2 p-2 bg-gray-700 text-white text-sm font-semibold rounded shadow-lg z-10 mb-4 bottom-1 ">
                             Logout
                         </div>
                     )}
