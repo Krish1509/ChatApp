@@ -42,7 +42,7 @@ const SignUp = () => {
                         <input
                             type="text"
                             placeholder='Enter Full Name'
-                            className='w-full h-10 px-3 py-2 bg-[#1D232A] border border-gray-600 rounded-md focus:outline-none focus:border-blue-500'
+                            className='w-full h-10 px-3 py-2 bg-[#1D232A] text-gray-300 border border-gray-600 rounded-md focus:outline-none focus:border-blue-500'
                             value={inputs.fullName}
                             onChange={(e) => setInputs({ ...inputs, fullName: e.target.value })}
                         />
@@ -55,7 +55,7 @@ const SignUp = () => {
                         <input
                             type="text"
                             placeholder='Enter Username'
-                            className='w-full h-10 px-3 py-2 bg-[#1D232A] border border-gray-600 rounded-md focus:outline-none focus:border-blue-500'
+                            className='w-full h-10 px-3 py-2 bg-[#1D232A] text-gray-300 border border-gray-600 rounded-md focus:outline-none focus:border-blue-500'
                             value={inputs.username}
                             onChange={(e) => setInputs({ ...inputs, username: e.target.value })}
                         />
@@ -68,7 +68,7 @@ const SignUp = () => {
                         <input
                             type={showPassword ? 'text' : 'password'}
                             placeholder='Enter Password'
-                            className='w-full h-10 px-3 py-2 pr-10 bg-[#1D232A] border border-gray-600 rounded-md focus:outline-none focus:border-blue-500'
+                            className='w-full h-10 px-3 py-2 pr-10 bg-[#1D232A] text-gray-300 border border-gray-600 rounded-md focus:outline-none focus:border-blue-500'
                             value={inputs.password}
                             onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
                         />
@@ -88,7 +88,7 @@ const SignUp = () => {
                         <input
                             type={showConfirmPassword ? 'text' : 'password'}
                             placeholder='Enter Confirm Password'
-                            className='w-full h-10 px-3 py-2 pr-10 bg-[#1D232A] border border-gray-600 rounded-md focus:outline-none focus:border-blue-500'
+                            className='w-full h-10 px-3 py-2 pr-10 bg-[#1D232A] text-gray-300 border border-gray-600 rounded-md focus:outline-none focus:border-blue-500'
                             value={inputs.confirmPassword}
                             onChange={(e) => setInputs({ ...inputs, confirmPassword: e.target.value })}
                         />

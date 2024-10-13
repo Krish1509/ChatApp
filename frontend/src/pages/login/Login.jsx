@@ -29,7 +29,7 @@ const Login = () => {
                         <input
                             type="text"
                             placeholder='Enter Username'
-                            className='w-full h-10 input input-bordered focus:outline-none focus:border-blue-500 bg-[#1D232A]'
+                            className='w-full h-10 input input-bordered focus:outline-none focus:border-blue-500 bg-[#1D232A] text-gray-300'
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                         />
@@ -42,7 +42,7 @@ const Login = () => {
                         <input
                             type="password"
                             placeholder='Enter Password'
-                            className="w-full h-10 input input-bordered focus:outline-none focus:border-blue-500 bg-[#1D232A]"
+                            className="w-full h-10 input input-bordered focus:outline-none focus:border-blue-500 bg-[#1D232A] text-gray-300"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
