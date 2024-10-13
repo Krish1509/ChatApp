@@ -5,6 +5,9 @@ import useDeleteMessage from '../../hooks/useDeleteMessage';
 import toast from 'react-hot-toast';
 import { MdDelete, MdContentCopy } from "react-icons/md";
 
+// Regular expression to match URLs
+const urlRegex = /(https?:\/\/[^\s]+)/g;
+
 const Message = ({ message }) => {
     const { authUser } = useAuthContext();
     const { selectedConversation, setMessages, messages } = useConversation();
@@ -35,6 +38,29 @@ const Message = ({ message }) => {
             });
     };
 
+    // Function to convert plain text to clickable links
+    const formatMessageWithLinks = (msg) => {
+        const parts = msg.split(urlRegex); // Split the message into parts
+        return parts.map((part, index) => {
+            // If the part matches the URL regex, return an anchor tag
+            if (urlRegex.test(part)) {
+                return (
+                    <a 
+                        key={index} 
+                        href={part} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="text-[#FFFFFF] hover:text-gray-100 hover:underline  font-semibold cursor-pointer" // Style the link
+                    >
+                        {part}
+                    </a>
+                );
+            }
+            // Otherwise, return the text part
+            return <span key={index} className="text-white">{part}</span>; // Keep text white
+        });
+    };
+
     return (
         <div className={`chat ${chatClassName}`}>
             <div className="chat-image avatar">
@@ -49,21 +75,24 @@ const Message = ({ message }) => {
                             onClick={handleDelete} 
                             disabled={loading} 
                             className="delete-button text-xs text-[#e8edf1] mr-2"
-                            title="Delete Message"  // Simple tooltip using title attribute
+                            title="Delete Message"
                         >
                             <MdDelete />
                         </button>
                         <button 
                             onClick={handleCopy} 
                             className="copy-button text-xs text-[#e8edf1]"
-                            title="Copy Message"  // Simple tooltip using title attribute
+                            title="Copy Message"
                         >
                             <MdContentCopy />
                         </button>
                     </div>
                 )}
-                <div className={`chat-bubble text-white ${bubbleBgColor} pb-2 break-words overflow-hidden max-w-full`}>
-                    {message.message}
+                <div className={`chat-bubble ${bubbleBgColor} pb-2 max-w-[80%]`}>
+                    <div className="overflow-hidden whitespace-normal break-words max-w-full">
+                        {/* Format message with clickable links */}
+                        {formatMessageWithLinks(message.message)}
+                    </div>
                 </div>
             </div>
             <div className="chat-footer opacity-50 text-xs gap-1 items-center">{formattedTime}</div>
