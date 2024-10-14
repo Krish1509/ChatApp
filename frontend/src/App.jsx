@@ -6,8 +6,8 @@ import { Toaster } from 'react-hot-toast';
 import { useAuthContext } from './context/AuthContext';
 import About from "./pages/about/about";
 import ChatBot from './components/AI_ChatBot/ChatBot';
-import { useState, useEffect } from 'react'; // Import useState and useEffect
-import Loader from './components/Loder/Loader'; // Import the Loader component
+import { useState, useEffect } from 'react';
+import Loader from './components/Loder/Loader'; // Ensure the correct path to your Loader component
 
 function App() {
   const { authUser } = useAuthContext();
@@ -16,7 +16,7 @@ function App() {
   useEffect(() => {
     // Simulating an API call or delay to demonstrate the loader
     const timer = setTimeout(() => {
-      setLoading(false); // After 3 seconds, set loading to false
+      setLoading(false); // After 3 seconds, set loading to false (adjust as needed)
     }, 3000);
 
     return () => clearTimeout(timer); // Clean up the timer
@@ -27,8 +27,9 @@ function App() {
     return <Loader />;
   }
 
+  // Once loading is complete, display the application content
   return (
-    <div className='h flex flex-col justify-center'>
+    <div className='h-screen flex flex-col justify-center'>
       <Routes>
         <Route path='/' element={authUser ? <Home /> : <Navigate to='/login' />} />
         <Route path='/login' element={authUser ? <Navigate to='/' /> : <Login />} />
